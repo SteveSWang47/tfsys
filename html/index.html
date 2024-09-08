@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<head>
+    <title>TFSys Demo</title>
+    <meta charset="UTF-8">
+    <script>
+        function reqListener() {
+            document.getElementById("SelectArea").innerHTML = this.responseText;
+        }
+        function start() {
+            sjye = document.getElementById("InSjye").value;
+            if(sjye.match(/^[0-9]{7}$/)) {
+                document.getElementById("heada").innerHTML = "学工号: "+document.getElementById("InSjye").value+"<br />请选择要挑战的项目";
+                document.getElementById("InSjArea").style.display = "none";
+                document.getElementById("SelectArea").style.display = "block";
+                const req = new XMLHttpRequest();
+                req.addEventListener("load", reqListener);
+                req.open("GET", "https://vm.jason4788.com/cgi-bin/getsetlist.cgi?"+sjye);
+                req.send();
+            } else {
+                window.alert("您的输入无效 请正确输入您的学工号")
+                document.getElementById("heada").innerHTML = "请正确输入您的学工号";
+            }
+        }
+    </script>
+    <style>
+        body{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="heada">请输入您的学工号</h1>
+    <div id="InSjArea">
+        <input id="InSjye" />
+        <button onclick="start()">确定</button>
+    </div>
+    <div id="SelectArea" style="display: none;">
+    </div>
+</body>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<head>
+    <title>作答</title>
+    <meta charset="UTF-8">
+    <script>
+        right0 = 0;
+        function true0() { document.getElementById("curans0").innerHTML = "(正确) "; right0 = 1;}
+        function false0() { document.getElementById("curans0").innerHTML = "(错误) "; right0 = 0;}
+        right1 = 0;
+        function true1() { document.getElementById("curans1").innerHTML = "(正确) "; right1 = 1;}
+        function false1() { document.getElementById("curans1").innerHTML = "(错误) "; right1 = 0;}
+        right2 = 0;
+        function true2() { document.getElementById("curans2").innerHTML = "(正确) "; right2 = 0;}
+        function false2() { document.getElementById("curans2").innerHTML = "(错误) "; right2 = 1;}
+        function reqListener() {
+            document.getElementById("remoteresult").innerHTML = this.responseText;
+        }
+        function on_submit() {
+            let res = 0 + right0 + right1 + right2;
+            for(var ansspan of document.getElementsByClassName("ans")) {
+                ansspan.style.display = "block";
+            }
+            for(var btnspan of document.getElementsByClassName("solvbtn")) {
+                btnspan.innerHTML = "";
+            }
+            document.getElementById("result").innerHTML = " 您总共答对了 " + res + " 道题。";
+            const req = new XMLHttpRequest();
+            req.addEventListener("load", reqListener);
+            req.open("POST", "https://vm.jason4788.com/cgi-bin/submitresult.cgi");
+            req.send("000000000000 "+res);
+        }
+    </script>
+    <style>
+        body{
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="heada">请判断对错并点击提交</h1>
+    <span id="curans0">() </span><span class="solvbtn"><button onclick="true0() ">正确</button><button onclick="false0() ">错误</button></span> <span>题目内容0</span><span class="ans" style="display: none;"><br />正确答案: 正确<br /></span><br />
+    <span id="curans1">() </span><span class="solvbtn"><button onclick="true1() ">正确</button><button onclick="false1() ">错误</button></span> <span>题目内容1</span><span class="ans" style="display: none;"><br />正确答案: 正确<br /></span><br />
+    <span id="curans2">() </span><span class="solvbtn"><button onclick="true2() ">正确</button><button onclick="false2() ">错误</button></span> <span>题目内容2</span><span class="ans" style="display: none;"><br />正确答案: 错误<br /></span><br />
+    <button onclick="on_submit() ">提交</button><span id="result"></span>
+    <div id="remoteresult"></div>
+</body>
