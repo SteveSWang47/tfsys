@@ -1,3 +1,5 @@
+#include "macros.h"
+
 #include <fstream>
 #include <string>
 #include <stdio.h>
@@ -56,7 +58,7 @@ int main()
             document.getElementById("result").innerHTML = " 您总共答对了 " + res + " 道题。";
             const req = new XMLHttpRequest();
             req.addEventListener("load", reqListener);
-            req.open("POST", "https://vm.jason4788.com/cgi-bin/submitresult.cgi");
+            req.open("POST", "%s/cgi-bin/submitresult.cgi");
             req.send("%s%s "+res);
         }
     </script>
@@ -69,7 +71,7 @@ int main()
 
 <body>
     <h1 id="heada">请判断对错并点击提交</h1>
-)", probset.data(), id.data());
+)", URL_ROOT, probset.data(), id.data());
     for(int i = 0; i < siz; i++)
     {
         curlin = pbq.front();
