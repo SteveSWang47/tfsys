@@ -64,6 +64,7 @@ int main()
     </script>
     <style>
         body{
+            background-image: linear-gradient(96deg, rgb(252, 225, 185), rgb(255, 240, 217));
             text-align: left;
         }
     </style>
