@@ -31,7 +31,7 @@ int main()
             while(datin >> cres) sum++, mx = ((mx > res) ? mx : cres);
             if(sum > 50)
             {
-                printf("本题您的提交次数过多，此次结果将不被记录。");
+                printf("Content-type: text/html\n\n本题您的提交次数过多，此次结果将不被记录。");
                 return 0;
             }
         }
